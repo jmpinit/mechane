@@ -1,0 +1,8 @@
+#vim
+*.swp
+
+# avr build
+*.o
+*.a
+*.hex
+*.lib
