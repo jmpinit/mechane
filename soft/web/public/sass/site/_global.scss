@@ -1,0 +1,397 @@
+/* =====================================
+ Global Styles
+ ===================================== */
+
+
+
+@import "compass/css3"; 
+@import "compass/css3/transition"; 
+@import "compass/css3/transform";
+
+@font-face {
+    font-family: 'quicksandbold';
+    src: url('fonts/quicksand_bold-webfont.eot');
+    src: url('fonts/quicksand_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/quicksand_bold-webfont.woff') format('woff'),
+         url('fonts/quicksand_bold-webfont.ttf') format('truetype'),
+         url('fonts/quicksand_bold-webfont.svg#quicksandbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'quicksandbold_oblique';
+    src: url('fonts/quicksand_bold_oblique-webfont.eot');
+    src: url('fonts/quicksand_bold_oblique-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/quicksand_bold_oblique-webfont.woff') format('woff'),
+         url('fonts/quicksand_bold_oblique-webfont.ttf') format('truetype'),
+         url('fonts/quicksand_bold_oblique-webfont.svg#quicksandbold_oblique') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'quicksandbook_oblique';
+    src: url('fonts/quicksand_book_oblique-webfont.eot');
+    src: url('fonts/quicksand_book_oblique-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/quicksand_book_oblique-webfont.woff') format('woff'),
+         url('fonts/quicksand_book_oblique-webfont.ttf') format('truetype'),
+         url('fonts/quicksand_book_oblique-webfont.svg#quicksandbook_oblique') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'quicksandbook';
+    src: url('fonts/quicksand_book-webfont.eot');
+    src: url('fonts/quicksand_book-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/quicksand_book-webfont.woff') format('woff'),
+         url('fonts/quicksand_book-webfont.ttf') format('truetype'),
+         url('fonts/quicksand_book-webfont.svg#quicksandbook') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'quicksanddash';
+    src: url('fonts/quicksand_dash-webfont.eot');
+    src: url('fonts/quicksand_dash-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/quicksand_dash-webfont.woff') format('woff'),
+         url('fonts/quicksand_dash-webfont.ttf') format('truetype'),
+         url('fonts/quicksand_dash-webfont.svg#quicksanddash') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'quicksandlight_oblique';
+    src: url('fonts/quicksand_light_oblique-webfont.eot');
+    src: url('fonts/quicksand_light_oblique-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/quicksand_light_oblique-webfont.woff') format('woff'),
+         url('fonts/quicksand_light_oblique-webfont.ttf') format('truetype'),
+         url('fonts/quicksand_light_oblique-webfont.svg#quicksandlight_oblique') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'quicksandlight';
+    src: url('fonts/quicksand_light-webfont.eot');
+    src: url('fonts/quicksand_light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/quicksand_light-webfont.woff') format('woff'),
+         url('fonts/quicksand_light-webfont.ttf') format('truetype'),
+         url('fonts/quicksand_light-webfont.svg#quicksandlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+//$tan: rgb(234,230,220);
+//$brown: adjust-lightness( adjust-saturation( rgb(85,49,26), -20% ), 2% );
+$red: #e05a50;
+$light-blue: #28bdf4;
+$dark-blue: #286ebe;
+$light-green: #60ef8f;
+$dark-green: #3c965a;
+$light-gray: #f5ebe5;
+$dark-gray: #373633;
+
+$background-fade-speed:.5s;
+$text-fade-speed:.2s;
+$header-fade-speed:.6s; 
+
+html {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  height: 100%;
+  min-height: 100%;
+  // background: $light-gray;
+  color: $dark-gray;
+  font-family: quicksandbook, Futura, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  position: relative;
+  background-attachment: scroll;
+}
+
+section {
+	position: relative;
+}
+
+#container {
+	width: 100%;
+	position: relative;
+}
+
+h1, h2, h3, h4, h5, h6, a, p, b, .copyright {
+	//color: $yellow;
+	font-family: quicksandbook, Futura, Arial, sans-serif;
+	font-weight: normal;
+	-webkit-transition: color $text-fade-speed linear;
+	-moz-transition: color $text-fade-speed linear;
+}
+
+p {
+	font-size: 1.15em;
+}
+
+.light-text {
+	h1, h2, h3, h4, h5, h6, a, p, b {
+		color: $light-gray;
+	}
+
+}
+
+.dark-text {
+	h1, h2, h3, h4, h5, h6, a, p, b {
+		color: $dark-gray;
+	}
+
+}
+
+.white {
+	color: white;
+}
+
+.red {
+	-webkit-transition: background-color $background-fade-speed linear;
+	-moz-transition: background-color $background-fade-speed linear;
+	background-color: $red;
+
+	h1, h2, h3, h4, h5, h6, a, p, b {
+		color: $dark-gray;
+	}
+}
+.light-blue {
+	-webkit-transition: background-color $background-fade-speed linear;
+	-moz-transition: background-color $background-fade-speed linear;
+	background-color: $light-blue;
+
+	h1, h2, h3, h4, h5, h6, a, p, b {
+		color: $dark-gray;
+	}
+}
+.dark-blue {
+	-webkit-transition: background-color $background-fade-speed linear;
+	-moz-transition: background-color $background-fade-speed linear;
+	background-color: $dark-blue;
+
+	h1, h2, h3, h4, h5, h6, a, p, b {
+		color: $light-gray;
+	}
+}
+
+.light-green {
+	-webkit-transition: background-color $background-fade-speed linear;
+	-moz-transition: background-color $background-fade-speed linear;
+	background-color: $light-green;
+
+	h1, h2, h3, h4, h5, h6, a, p, b {
+		color: $dark-gray;
+	}
+}
+.dark-green {
+	-webkit-transition: background-color $background-fade-speed linear;
+	-moz-transition: background-color $background-fade-speed linear;
+	background-color: $dark-green;
+
+	h1, h2, h3, h4, h5, h6, a, p, b {
+		color: $dark-gray;
+	}
+}
+.light-gray {
+	-webkit-transition: background-color $background-fade-speed linear;
+	-moz-transition: background-color $background-fade-speed linear;
+	background-color: $light-gray;
+
+	h1, h2, h3, h4, h5, h6, a, p, b {
+		color: $dark-gray;
+	}
+}
+.dark-gray {
+	background-color: $dark-gray;
+	h1, h2, h3, h4, h5, h6, a, p, b {
+		color: $light-gray;
+	}
+
+}
+
+.centered {
+	text-align: center;
+}
+
+.hidden {
+	display: none;
+}
+
+// Desktop Navigation
+@media only screen and (min-width: 768px) {
+
+}
+
+
+#footer {
+	position: relative;
+	width: 100%;
+	height: 3em;
+	background-color: #0a0404;
+	
+	.copyright {
+		position: relative;
+		top: 40%;
+		font-size: 1em;
+		color: $light-gray;
+		opacity: .75;
+	}
+
+}
+
+.sidebar {
+	position: fixed;
+	width: 25%;
+	left:0px;
+	top:0px;
+	bottom:0px;
+	background-color: black;
+	opacity: .6;
+}
+
+.fullwindow{
+	position: relative;
+	// height: 100%;
+	width: 100%;
+	display: block;
+	min-height: 300px;
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	border: 0;
+	// border-bottom:5px solid black;
+}
+
+.header.active {
+		opacity: .9;
+		-webkit-transition: all $header-fade-speed ease-in-out;
+	    -moz-transition: all $header-fade-speed ease-in-out;
+	    -o-transition: all $header-fade-speed ease-in-out;
+	    -ms-transition: all $header-fade-speed ease-in-out;
+	    transition: all $header-fade-speed ease-in-out;
+	    background-color:$dark-gray; 
+}
+
+.header {
+	opacity: 0;
+}
+
+.header, .blog-header {
+	position:relative; 
+	top:0px; 
+	width: 100%;
+	height:2.5em; 
+	background-color:$dark-gray; 
+	z-index: 100;
+
+	h1, h2, h3, h4, h5, h6, a, p, b, img {
+		color:$light-gray;	
+		-webkit-transition: all .1s ease-in-out;
+	    -moz-transition: all .1s ease-in-out;
+	    -o-transition: all .1s ease-in-out;
+	    -ms-transition: all .1s ease-in-out;
+	    transition: all .1s ease-in-out;
+	}
+
+	#blog-button, #title-button, #logo {
+		margin: 0;
+		padding:0;
+		position: relative;
+		float:left;
+		bottom: 0px;
+		display:inline-block;
+	}
+
+	#logo {
+		margin-left: 12px;
+		margin-top: 7px;
+	}
+
+	#blog-button {
+		margin-left: 20px;
+		margin-top: 3px;
+		opacity: .7;
+		color: $light-gray;
+	}
+
+	#title-button {
+		margin-left: 20px;
+		margin-top: 3px;
+		font-weight:900;
+		color: $red;
+	}
+
+	.right-button {
+		margin-top: 3px;
+		margin-right: 13px;
+		padding:0;
+		position: relative;
+		float:right;
+		bottom: 0px;
+		display:inline-block;
+		font-weight: 500;
+	}
+
+	.right-button:hover, .right-button.active, #title-button:hover, #blog-button:hover {
+		color: transparent;
+		-webkit-transition: all .1s ease-in-out;
+	    -moz-transition: all .1s ease-in-out;
+	    -o-transition: all .1s ease-in-out;
+	    -ms-transition: all .1s ease-in-out;
+	    transition: all .1s ease-in-out;
+	}
+	.right-button:hover {
+		text-shadow: 0px 0px 2px $light-green;
+	}
+	#title-button:hover {
+		text-shadow: 0px 0px 2px $red;
+	}
+	#blog-button:hover {
+		text-shadow: 0px 0px 2px $light-gray;
+	}
+	.right-button.active {
+		text-shadow: 0px 0px 2px $light-blue;
+	}
+
+	// border-bottom: 1px solid rgb(245, 235, 229);
+	 // border-bottom: 1px solid rgba(245, 235, 229, .5);
+
+
+}
+
+
+.header.show-for-small, .blog-header.show-for-small {
+	top:0px; 
+	width: 100%;
+	height:2.5em;
+
+	.right-button {
+		margin: 0;
+		padding:0;
+		position: relative;
+		float:right;
+		bottom: 0px;
+		display:inline-block;
+		font-weight: 500;
+	}
+	h4 {
+		margin-top: 7px !important;
+		margin-right: 7px !important;
+		font-size: 1.2em;
+		letter-spacing: -1.5px !important;
+	}
+
+}
+
+
+
+
+
+

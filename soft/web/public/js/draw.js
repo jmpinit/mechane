@@ -3,16 +3,21 @@
 var mousePressed = false; 
 var lastX, lastY;
 var ctx;
-var points = new Array();
+var z = false;
+// var points = new Array();
 
 function InitThis() {
     ctx = document.getElementById('myCanvas').getContext("2d");
 
     $('#myCanvas').mousedown(function (e) { 
         mousePressed = true;
-        points = [];
-
-        Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
+        // points = [];
+        var x = Math.round(e.pageX - $(this).offset().left);
+        var y = Math.round(e.pageY - $(this).offset().top);
+        Draw(x, y, false);
+        z = true;
+        sendToSocket({"z":z});
+        sendToSocket({"x":x,"y":y});
     });
 
     $('#myCanvas').mousemove(function (e) {
@@ -21,18 +26,29 @@ function InitThis() {
             var y = Math.round(e.pageY - $(this).offset().top);
             Draw(x, y, true);
             //console.log(e.timeStamp);
-            points.push({"x":x,"y":y});
+            // points.push({"x":x,"y":y});
+            sendToSocket({"x":x,"y":y});
+
         }
     });
 
     $('#myCanvas').mouseup(function (e) {
         mousePressed = false;
-        if (points.length > 0) sendToSocket(points.length);
+        z = false;
+        sendToSocket({"z":z});
+        // console.log(points.length);
+        // if (points.length > 0) sendToSocket(points);
     });
 
     $('#myCanvas').mouseleave(function (e) {
         mousePressed = false;
-        if (points.length > 0) sendToSocket(points.length);
+        if (z == true){
+            z = false;
+            sendToSocket({"z":z});
+        }
+        
+        // console.log(points.length);
+        // if (points.length > 0) sendToSocket(points);
     });
 }
 
@@ -70,7 +86,7 @@ function sendToPHP(data) {
     'text');   
 }
 
-function sendToSocket(url, callback) {
+function sendToSocket(point) {
     // $.ajax({
     //     url: '/dl',
     //     type: 'PUT',
@@ -90,10 +106,11 @@ function sendToSocket(url, callback) {
         url: '/dl',
         type: 'PUT',
         contentType: 'application/json',
-        data: points,
+        data: JSON.stringify(point),
         dataType: 'json',
         statusCode: {
         }
     });
-    points = [];
+
+    // points = [];
 }

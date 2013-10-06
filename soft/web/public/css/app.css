@@ -3666,11 +3666,12 @@ p {
 }
 .home #work {
   position: relative;
-  padding-top: 40px;
-  padding-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 70px;
 }
 .home #work h1 {
-  padding-bottom: 50px;
+  margin-bottom: 20px;
+  padding-bottom: 0;
 }
 .home #work h2 {
   font-size: .6em;
@@ -3681,6 +3682,7 @@ p {
 }
 .home #work #draw canvas {
   background-color: white;
+  margin-top: 10px;
 }
 .home #work #draw #controls {
   vertical-align: middle;
@@ -3695,12 +3697,14 @@ p {
   padding: 5px;
   padding-left: 10px;
   padding-right: 10px;
+  font-size: 20px;
   font-weight: normal;
-  background-color: #286ebe;
+  background-color: #373633;
   border: 0;
   outline: none;
   text-decoration: none;
   margin-right: 20px;
+  margin-top: 20px;
 }
 .home #work #draw input, .home #work #draw textarea {
   width: 100%;
@@ -3807,7 +3811,7 @@ p {
   align: left;
   position: relative;
   padding-top: 40px;
-  padding-bottom: 55px;
+  padding-bottom: 0;
 }
 @media only screen and (min-height: 750px) {
   .home #process {
@@ -3817,7 +3821,6 @@ p {
 }
 .home #process .process-bullet {
   margin-bottom: 20px;
-  display: none;
 }
 .home #process .icon-wrapper {
   height: 80%;

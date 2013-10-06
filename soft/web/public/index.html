@@ -83,7 +83,7 @@
 			<noscript><img id="logo" src="./img/headerlogo.svg" height="25px" width="25px"></noscript>
 
 			<a class="scroll" href="#contact-me"><h4 class="right-button" id="contact-button">contact</h4></a>
-			<a class="scroll" href="#about-me"><h4 class="right-button" id="about-button">about</h4></a>
+			<!-- <a class="scroll" href="#about-me"><h4 class="right-button" id="about-button">about</h4></a> -->
 			<a class="scroll" href="#process"><h4 class="right-button" id="process-button">process</h4></a>
 			<a class="scroll" href="#work"><h4 class="right-button" id="work-button">work</h4></a>
 			<a class="scroll" href="#services"><h4 class="right-button" id="services-button">services</h4></a>
@@ -95,7 +95,7 @@
 		<div class="row" style="max-width: none;">
 			<a href="../blog.hazelnutdev.com"><h4 id="blog-button">blog</h4></a>
 			
-			<a class="scroll" href="#about-me"><h4 class="right-button" id="contact-button">contact</h4></a>
+			<!-- <a class="scroll" href="#about-me"><h4 class="right-button" id="contact-button">contact</h4></a> -->
 			<a class="scroll" href="#process"><h4 class="right-button" id="process-button">process</h4></a>
 			<a class="scroll" href="#work"><h4 class="right-button" id="work-button">work</h4></a>
 			<a class="scroll" href="#services"><h4 class="right-button" id="services-button">services</h4></a>
@@ -118,48 +118,11 @@
 		<h1><em class="show-for-small">...Section</em></h1>
 	</div>
 
-	<div id="work">
-		<div id="scrolly" style="position:absolute; top:30%; height:100% display:none;">&nbsp;</div>
-		<h1>Draw Here<h1>
-
-
-	<div id="draw" align="center">
-        <canvas id="myCanvas" width="700" height="400" style="border:0px solid black"></canvas>
-        <br/>
-        <div id="controls">
-	        <button id="clearArea">Clear Area</button>
-	        <button onclick="">Draw</button>
-
-	        <div style="display:none;">
-		        Line width : <select id="selWidth">
-		            <option value="1">1</option>
-		            <option value="3">3</option>
-		            <option value="5">5</option>
-		            <option value="7">7</option>
-		            <option value="9" selected="selected">9</option>
-		            <option value="11">11</option>
-		        </select> 
-		        Color : <select id="selColor">
-		            <option value="black">black</option>
-		            <option value="blue" selected="selected">blue</option>
-		            <option value="red">red</option>
-		            <option value="green">green</option>
-		            <option value="yellow">yellow</option>
-		            <option value="gray">gray</option>
-		        </select>
-		    </div>
-	    </div>
-	    <div id="coordsResponse" style="display: none; font-size:15px; margin:10px;"></div>
-    </div>
-
-
-	</div>
-
-	<div class="window" id="process" >
-		<div id="scrolly" style="position:absolute; top:70%; height:100% display:none;">&nbsp;</div>
+	<div class="window" id="process">
+		<div id="scrolly" style="position:absolute; top:40%; height:100% display:none;">&nbsp;</div>
 		<div style="text-align:center;"><h1>Section 2</h1></div>
 
-		<div class="row process-bullet">
+	    <div class="row process-bullet">
 			<div class="small-12 large-9 small-centered columns" >
 				<div class="row">
 					<div class="large-3 large-offset-1 small-4 columns" style="text-align:center;">
@@ -168,6 +131,10 @@
 							<noscript><img src="./img/planicon.svg" width="100%"></noscript>
 						</div>
 					</div>
+					<div class="large-8 small-8 columns">
+						<h2>refine</h2>
+						<p>I polish the site until it shines, then bring in the client to make sure everything is up to scratch.</p>
+					</div> 	
 				</div>
 			</div>
 		</div>
@@ -181,8 +148,11 @@
 							<img class="lazy" data-original="./img/designicon.svg">
 						</div>
 					</div>
+					<div class="large-8 small-8 columns">
+						<h2>refine</h2>
+						<p>I polish the site until it shines, then bring in the client to make sure everything is up to scratch.</p>
+					</div> 	
 				</div>
-
 			</div>
 		</div>
 
@@ -195,6 +165,10 @@
 							<img class="lazy" data-original="./img/buildicon.svg">
 						</div>
 					</div>
+					<div class="large-8 small-8 columns">
+						<h2>refine</h2>
+						<p>I polish the site until it shines, then bring in the client to make sure everything is up to scratch.</p>
+					</div> 	
 				</div>
 			</div>
 		</div>
@@ -208,17 +182,56 @@
 							<img class="lazy" data-original="./img/refineicon.svg">
 						</div>
 					</div>
+					<div class="large-8 small-8 columns">
+						<h2>refine</h2>
+						<p>I polish the site until it shines, then bring in the client to make sure everything is up to scratch.</p>
+					</div> 	
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="about-me">
+	<div id="work">
+		<div id="scrolly" style="position:absolute; top:60%; height:100% display:none;">&nbsp;</div>
+		<div style="text-align:center;"><h1>Draw Here</h1></div>
+
+		<div id="draw" align="center">
+	        <canvas id="myCanvas" width="800" height="450" style="border:0px solid black"></canvas>
+	        <br/>
+	        <div id="controls">
+		        <button id="clearArea">Clear Canvas</button>
+		        <!-- <button onclick="">Draw</button> -->
+
+		        <div style="display:none;">
+			        Line width : <select id="selWidth">
+			            <option value="1">1</option>
+			            <option value="3">3</option>
+			            <option value="5">5</option>
+			            <option value="7">7</option>
+			            <option value="9" selected="selected">9</option>
+			            <option value="11">11</option>
+			        </select> 
+			        Color : <select id="selColor">
+			            <option value="black">black</option>
+			            <option value="blue" selected="selected">blue</option>
+			            <option value="red">red</option>
+			            <option value="green">green</option>
+			            <option value="yellow">yellow</option>
+			            <option value="gray">gray</option>
+			        </select>
+			    </div>
+		    </div>
+		    <div id="coordsResponse" style="display: none; font-size:15px; margin:10px;"></div>
+	    </div>
+
+	</div>
+
+<!-- 	<div id="about-me">
 		<div id="scrolly" style="position:absolute; top:100%; height:100% display:none;">&nbsp;</div>
 			<h1>half width</h1>
 			<div class="row">
 			</div>
-	</div>
+	</div> -->
 
 	<!-- <div class="halfwindow" id="contact-me"> -->
 	<div id="contact-me">

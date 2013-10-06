@@ -107,30 +107,32 @@ $('#services #scrolly').bind('inview', function(event, isInView, visiblePartX, v
 	}
 });
 
-$('#work #scrolly').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
+$('#process #scrolly').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
 	if (isInView) {
 		$('.main').removeClass('dark-green red light-gray dark-blue light-blue dark-blue');
 		$('.main').addClass('light-green');
 		$('.header #work-button').addClass('active');
 		//$('.header').addClass('active');
+		$('img').addClass('active');
 
 	} 
 	else{
 		$('.header #work-button').removeClass('active');
+		$('img').removeClass('active');
 	}
 });
 
-$('#process #scrolly').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
+$('#work #scrolly').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
 	if (isInView) {
 		$('.main').removeClass('dark-green light-green red light-gray light-blue dark-blue');
 		$('.main').addClass('dark-blue');
 		$('.header #process-button').addClass('active');
 		$('.header').addClass('active');
-		$('img').addClass('active');
+		
 	} 
 	else{
 		$('.header #process-button').removeClass('active');
-		$('img').removeClass('active');
+		
 	}
 });
 
