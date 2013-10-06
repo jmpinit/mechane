@@ -3659,7 +3659,7 @@ p {
 .home #services .top-text.hide-for-small {
   margin-left: -25%;
   margin-top: 10px;
-  font-size: 4em;
+  font-size: 2em;
 }
 .home #services em {
   padding: 0;
@@ -3667,7 +3667,7 @@ p {
   font-family: 'quicksanddash';
 }
 .home #services em.hide-for-small {
-  font-size: 1.5em;
+  font-size: .75em;
   margin-right: -20%;
   font-weight: 500;
   overflow: hidden;
