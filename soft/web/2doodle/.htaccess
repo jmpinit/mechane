@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Password Protected Area"
+AuthUserFile /home1/hazelnu2/public_html/2doodle/.htpasswd
+Require valid-user

@@ -157,7 +157,7 @@ $img-speed: .7s;
 
 	#work {
 		position: relative;
-		padding-top: 0px;
+		padding-top: 25px;
 		padding-bottom: 70px;
 
 		h1 {
@@ -336,6 +336,7 @@ $img-speed: .7s;
 		position: relative;
 		padding-top: 40px;
 		padding-bottom: 0;
+		margin-bottom: -20px;
 		//max-height: 1000px !important;
 
 		@media only screen and (min-height: 750px) {

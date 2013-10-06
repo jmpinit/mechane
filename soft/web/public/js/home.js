@@ -136,7 +136,7 @@ $('#work #scrolly').bind('inview', function(event, isInView, visiblePartX, visib
 	}
 });
 
-$('#about-me #scrolly').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
+$('#contact-me #scrolly').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
 	if (isInView) {
 		$('.main').removeClass('dark-green light-green red light-gray light-blue dark-blue');
 		$('.main').addClass('dark-blue');

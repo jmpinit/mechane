@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="434px" height="434px" viewBox="0 0 434 434" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>print</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs></defs>
+    <g id="Page 1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M217,434 C336.845797,434 434,336.845797 434,217 C434,97.1542034 336.845797,0 217,0 C97.1542034,0 0,97.1542034 0,217 C0,336.845797 97.1542034,434 217,434 Z M217,434" id="Oval 1" fill="#373633"></path>
+        <g id="Layer_1" transform="translate(68.000000, 68.000000)">
+            <path d="M0,0 L0,299 L299,299 L299,0 L0,0 Z M0,0" id="Rectangle"></path>
+            <path d="M258.5,140 C265.955844,140 272,133.955844 272,126.5 C272,119.044156 265.955844,113 258.5,113 C251.044156,113 245,119.044156 245,126.5 C245,133.955844 251.044156,140 258.5,140 Z M258.5,140" id="Oval" fill="#3C965A"></path>
+            <path d="M239,89 L239,5 L60,5 L60,89" id="Shape" stroke="#3C965A" stroke-width="13"></path>
+            <path d="M239,174 L239,293 L60,293 L60,174 L239,174 L239,174 Z M239,174" id="Shape" stroke="#3C965A" stroke-width="8"></path>
+            <path d="M59.8125,240 L17.9583333,240 C11.3573333,240 6,234.624 6,228 L6,102 C6,95.376 11.3573333,90 17.9583333,90 L281.041667,90 C287.642667,90 293,95.376 293,102 L293,228 C293,234.624 287.642667,240 281.041667,240 L239.1875,240" id="Shape" stroke="#3C965A" stroke-width="14"></path>
+            <path d="M209,209 L90,209" id="Shape" stroke="#3C965A" stroke-width="4"></path>
+            <path d="M186,232 L90,232" id="Shape" stroke="#3C965A" stroke-width="4"></path>
+            <path d="M209,257 L90,257" id="Shape" stroke="#3C965A" stroke-width="4"></path>
+        </g>
+    </g>
+</svg>

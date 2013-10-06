@@ -3425,6 +3425,7 @@ p {
   width: 100%;
   height: 3em;
   background-color: #0a0404;
+  padding-bottom: 30px;
 }
 #footer .copyright {
   position: relative;
@@ -3432,6 +3433,9 @@ p {
   font-size: 1em;
   color: #f5ebe5;
   opacity: .75;
+}
+#footer b {
+  font-weight: 900;
 }
 
 .sidebar {
@@ -3509,7 +3513,7 @@ p {
   font-weight: 900;
   color: #e05a50;
 }
-.header .right-button, .blog-header .right-button {
+.header .right-button, .header .left-button, .blog-header .right-button, .blog-header .left-button {
   margin-top: 3px;
   margin-right: 13px;
   padding: 0;
@@ -3519,7 +3523,11 @@ p {
   display: inline-block;
   font-weight: 500;
 }
-.header .right-button:hover, .header .right-button.active, .header #title-button:hover, .header #blog-button:hover, .blog-header .right-button:hover, .blog-header .right-button.active, .blog-header #title-button:hover, .blog-header #blog-button:hover {
+.header .left-button, .blog-header .left-button {
+  float: left;
+  margin-left: 13px;
+}
+.header .left-button:hover, .header .left-button.active, .header .right-button:hover, .header .right-button.active, .header #title-button:hover, .header #blog-button:hover, .blog-header .left-button:hover, .blog-header .left-button.active, .blog-header .right-button:hover, .blog-header .right-button.active, .blog-header #title-button:hover, .blog-header #blog-button:hover {
   color: transparent;
   -webkit-transition: all 0.1s ease-in-out;
   -moz-transition: all 0.1s ease-in-out;
@@ -3527,7 +3535,7 @@ p {
   -ms-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
 }
-.header .right-button:hover, .blog-header .right-button:hover {
+.header .left-button:hover, .header .right-button:hover, .blog-header .left-button:hover, .blog-header .right-button:hover {
   text-shadow: 0px 0px 2px #60ef8f;
 }
 .header #title-button:hover, .blog-header #title-button:hover {
@@ -3536,7 +3544,7 @@ p {
 .header #blog-button:hover, .blog-header #blog-button:hover {
   text-shadow: 0px 0px 2px #f5ebe5;
 }
-.header .right-button.active, .blog-header .right-button.active {
+.header .left-button.active, .header .right-button.active, .blog-header .left-button.active, .blog-header .right-button.active {
   text-shadow: 0px 0px 2px #28bdf4;
 }
 
@@ -3666,7 +3674,7 @@ p {
 }
 .home #work {
   position: relative;
-  padding-top: 0px;
+  padding-top: 25px;
   padding-bottom: 70px;
 }
 .home #work h1 {
@@ -3812,6 +3820,7 @@ p {
   position: relative;
   padding-top: 40px;
   padding-bottom: 0;
+  margin-bottom: -20px;
 }
 @media only screen and (min-height: 750px) {
   .home #process {

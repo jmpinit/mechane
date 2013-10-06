@@ -19,7 +19,7 @@ app.put("/dl", function(req, res) {
 		res.end();
 
 		if(client_socket) {
-			client_socket.write(JSON.stringify(data, null, 0));
+			client_socket.write(JSON.stringify(data));
 		}
 	});
 });
