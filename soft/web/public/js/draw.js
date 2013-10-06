@@ -4,7 +4,6 @@ var mousePressed = false;
 var lastX, lastY;
 var ctx;
 var points = new Array();
-var data = new Object();
 
 function InitThis() {
     ctx = document.getElementById('myCanvas').getContext("2d");
@@ -20,25 +19,20 @@ function InitThis() {
         if (mousePressed) {
             var x = Math.round(e.pageX - $(this).offset().left);
             var y = Math.round(e.pageY - $(this).offset().top);
-            console.log(x);
             Draw(x, y, true);
-            console.log(e.timeStamp);
+            //console.log(e.timeStamp);
             points.push({"x":x,"y":y});
         }
     });
 
     $('#myCanvas').mouseup(function (e) {
         mousePressed = false;
-        sendToSocket(points);
-        console.log(JSON.stringify(points, null, 4)); 
+        if (points.length > 0) sendToSocket(points.length);
     });
 
     $('#myCanvas').mouseleave(function (e) {
         mousePressed = false;
-        data.points = points;
-        data.timestamp = e.timeStamp;
-        sendToSocket(data);
-        console.log(JSON.stringify(points, null, 4)); 
+        if (points.length > 0) sendToSocket(points.length);
     });
 }
 
@@ -63,7 +57,7 @@ function clearArea() {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
 
-function sendToSocket(data) {
+function sendToPHP(data) {
     $.post('socket.php', 
     {
         coords: data
@@ -74,4 +68,32 @@ function sendToSocket(data) {
 
     }, 
     'text');   
+}
+
+function sendToSocket(url, callback) {
+    // $.ajax({
+    //     url: '/dl',
+    //     type: 'PUT',
+    //     contentType: 'application/json',
+    //     data: JSON.stringify({ url: url }),
+    //     dataType: 'json',
+    //     statusCode: {
+    //         200: function() {
+    //             callback(true);
+    //         },
+    //         400: function() {
+    //             callback(false);
+    //         }
+    //     }
+    // });
+    $.ajax({
+        url: '/dl',
+        type: 'PUT',
+        contentType: 'application/json',
+        data: points,
+        dataType: 'json',
+        statusCode: {
+        }
+    });
+    points = [];
 }
