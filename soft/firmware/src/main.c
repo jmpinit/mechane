@@ -78,33 +78,6 @@ int main(void) {
 
 	sei();
 
-	// FIXME ====
-	DDRC |= 1 << PIN_M_EN;
-	PORTC |= 1 << PIN_M_EN;
-
-	forever {
-		for(unsigned int i=0; i < 255; i++) {
-			motor_set_vel(LEFT, i);
-			_delay_ms(10);
-		}
-		
-		for(unsigned int i=0; i < 255; i++) {
-			motor_set_vel(LEFT, 255-i);
-			_delay_ms(10);
-		}
-
-		for(unsigned int i=0; i < 255; i++) {
-			motor_set_vel(RIGHT, i);
-			_delay_ms(10);
-		}
-		
-		for(unsigned int i=0; i < 255; i++) {
-			motor_set_vel(RIGHT, 255-i);
-			_delay_ms(10);
-		}
-	}
-	// ==========
-
 	// control
 
 	char digit_buffer[NUM_SIZE];
@@ -122,27 +95,25 @@ int main(void) {
 			} else {
 				if(mode == CMD) {
 					switch(c) {
-						case 'p':
+						case 'p': // set position mode
 						case 'P':
-							// TODO position query
-							uart_tx_str("pos\n\r");
+							motor.mode = POSITION;
 							break;
-						case 's':
+						case 'v': // set velocity mode
+						case 'V':
+							motor.mode = VELOCITY;
+							break;
+						case 's': // status
 						case 'S':
-							// TODO status message
-							uart_tx_str("status\n\r");
+							uart_tx_str("I am okay.\n\r");
 							break;
-						case 'k':
+						case 'k': // kill (de-energize)
 						case 'K':
-							// TODO kill (de-energize)
 							motor_stop();
-							uart_tx_str("kill\n\r");
 							break;
 						case 'b':
-						case 'B':
-							// TODO brake
+						case 'B': // brake
 							motor_brake();
-							uart_tx_str("brake\n\r");
 							break;
 					}
 
