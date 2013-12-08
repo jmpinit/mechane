@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>download</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs></defs>
+    <g id="Page 1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <path d="M150,300 C232.842717,300 300,232.842717 300,150 C300,67.1572834 232.842717,0 150,0 C67.1572834,0 0,67.1572834 0,150 C0,232.842717 67.1572834,300 150,300 Z M150,300" id="Oval 34" fill="#373633"></path>
+            <g transform="translate(85.000000, 59.000000)" fill="#28BDF4">
+                <path d="M48.0000431,0 C41.3726023,0 36,5.37999237 36,12.0076067 L36,110 L94,110 L94,12.0076067 C94,5.37598865 88.6215485,0 81.9999569,0 L48.0000431,0 Z M48.0000431,0" id="Rectangle 12"></path>
+                <path d="M60.8875816,112.352768 C63.1616048,109.948801 66.8503793,109.950761 69.122548,112.352768 L126.752087,173.275423 C131.310081,178.093874 129.624032,182 123.008222,182 L7.00190718,182 C0.376234094,182 -1.30545768,178.099695 3.25804299,173.275423 L60.8875816,112.352768 Z M60.8875816,112.352768" id="Triangle 1" transform="translate(65.002532, 145.000000) rotate(-180.000000) translate(-65.002532, -145.000000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

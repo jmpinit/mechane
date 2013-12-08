@@ -2,7 +2,7 @@ console.log("home.js...");
 
 $(function(){
 
-	InitThis();
+	// InitThis();
 
 	var macOffset = $('#mac-image').offset().top + parseInt($('#mac-image').css('width'))/2;
 	var macSpeed = $('#mac-image').data("speed"); 
