@@ -1,0 +1,232 @@
+/* =====================================
+Blog page
+ ===================================== */
+
+@import "compass/css3/transform"; 
+@import "animation";
+
+$red: #e05a50;
+$light-blue: #28bdf4;
+$dark-blue: #286ebe;
+$light-green: #60ef8f;
+$dark-green: #3c965a;
+$light-gray: #f5ebe5;
+$dark-gray: #373633;
+
+$arrow-speed:.2s;
+$fade-speed:.7s;
+$link-speed:.1s;
+
+
+// Home Page
+.blog {
+	min-height: 300px;
+	text-align: center;	
+	margin: 0;
+    padding: 0;	
+
+    p {
+        font-size:1.25em;
+        color: darken($dark-gray,10%)
+    }
+    //background-color: $red;
+
+
+    .main-post {
+        opacity: 0;
+
+        -webkit-transition: all $fade-speed ease-in-out;
+        -moz-transition: all $fade-speed ease-in-out;
+        -o-transition: all $fade-speed ease-in-out;
+        -ms-transition: all $fade-speed ease-in-out;
+        transition: all $fade-speed ease-in-out;
+    }
+
+    .main-post.active {
+        opacity: 1;
+
+        -webkit-transition: all $fade-speed ease-in-out;
+        -moz-transition: all $fade-speed ease-in-out;
+        -o-transition: all $fade-speed ease-in-out;
+        -ms-transition: all $fade-speed ease-in-out;
+        transition: all $fade-speed ease-in-out;
+    }
+    
+
+    b {
+        font-family: quicksandbold;
+    }
+    a {
+        color:$dark-green;
+    }
+
+    .blog-link {
+        margin-top: 85px;
+    }
+
+    .blog-link:hover {
+        //.columns {
+            padding-left:17px !important;
+            -webkit-transition: all $link-speed ease-in-out;
+            -moz-transition: all $link-speed ease-in-out;
+            -o-transition: all $link-speed ease-in-out;
+            -ms-transition: all $link-speed ease-in-out;
+            transition: all $link-speed ease-in-out;
+        //}
+        
+    }
+
+    .columns {
+        padding-left: auto;
+        -webkit-transition: all $link-speed ease-in-out;
+            -moz-transition: all $link-speed ease-in-out;
+            -o-transition: all $link-speed ease-in-out;
+            -ms-transition: all $link-speed ease-in-out;
+            transition: all $link-speed ease-in-out;
+    }
+
+
+    .blog-image {
+        margin-top: 45px;
+        width:150px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .blog-link {
+            margin-top: 45px;
+        }
+        .blog-image {
+            margin-top: 45px;
+            width:100px;
+        }
+    }
+
+    .video-container {     
+        position: relative;
+        padding-bottom: 56.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: hidden; 
+        iframe, object,embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 97%;
+            margin-left: 1.5%;
+            height: 92%; 
+            vertical-align: top;
+        }
+    } 
+
+    .code-container {     
+        position: relative;
+        padding: 0;
+        padding-top: 300px;
+        height: 0;
+        overflow: hidden; 
+        background-color: darken( $light-gray, 5% );
+        iframe, object,embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; 
+        }
+    } 
+
+    .blog-title {
+    	min-height: 200px;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        display: block;
+        position: relative;
+        //bottom: -10px;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+
+        .back-arrow {
+            height:60px; 
+            width:60px; 
+            opacity:.4; 
+            position:absolute; 
+            top:55px; 
+            left:4%;
+            margin-left:5px;
+
+            -webkit-transition: all $arrow-speed ease-in-out;
+            -moz-transition: all $arrow-speed ease-in-out;
+            -o-transition: all $arrow-speed ease-in-out;
+            -ms-transition: all $arrow-speed ease-in-out;
+            transition: all $arrow-speed ease-in-out;
+        }
+
+        .back-arrow:hover { 
+            opacity:.8; 
+            margin-left:0; 
+
+
+            -webkit-transition: all $arrow-speed ease-in-out;
+            -moz-transition: all $arrow-speed ease-in-out;
+            -o-transition: all $arrow-speed ease-in-out;
+            -ms-transition: all $arrow-speed ease-in-out;
+            transition: all $arrow-speed ease-in-out;
+        }
+
+        .blog-image-inverse {
+            position: absolute;
+            left: 50%;
+            margin-left: -100px;
+            width: 200px;
+            top:-18px;
+            
+        }
+
+        .date-image {
+            width: 150px;
+            position: absolute;
+            left: 50%;
+            margin-left: -75px;
+            bottom: 18px;
+
+        }
+
+    	h1 {
+            padding: 0;
+            margin: 0;
+            padding-top:85px;
+    		font-size: 5em;
+            line-height: 0;
+    		
+    	}
+
+        h2 {
+            padding: 0;
+            margin: 0;
+            padding-top:85px;
+            line-height: 0;
+        }
+
+    }
+
+
+}
+
+// Slides JS
+/* Prevent the slideshow from flashing on load */
+@media only screen {
+
+}
+@media only screen and (min-width: 500px) {
+
+}
+@media only screen and (min-width: 768px) {
+	// 768 to 1000
+}
+@media only screen and (min-width: 1000px) {
+	// 1000 to 1440
+}
+@media only screen and (min-width: 1440px) {
+	// Bigger than 1440
+}

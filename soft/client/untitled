@@ -1,0 +1,5 @@
+import serial
+
+ser = serial.Serial("/dev/tty.LeftMotor-RNI-SPP")  # open first serial port
+
+ser.write("100,0,100\n")

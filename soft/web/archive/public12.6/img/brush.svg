@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="434px" height="434px" viewBox="0 0 434 434" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>brush</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs></defs>
+    <g id="Page 1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M217,434 C336.845797,434 434,336.845797 434,217 C434,97.1542034 336.845797,0 217,0 C97.1542034,0 0,97.1542034 0,217 C0,336.845797 97.1542034,434 217,434 Z M217,434" id="Oval 1" fill="#373633"></path>
+        <g id="Group" transform="translate(96.000000, 90.703339)">
+            <g id="Layer_1" transform="translate(121.000000, 51.000000)"></g>
+            <g id="brush_x5F_alt" fill="#E05A50">
+                <g id="Group">
+                    <path d="M94,187.333333 C94,170.013833 79.9548333,156 62.6666667,156 C45.3471667,156 31.3333333,170.013833 31.3333333,187.333333 L31.3333333,187.396 C31.3333333,210.559167 18.7295,230.7535 0,241.587 L0.125333333,241.681 C9.306,246.9685 19.9515,250 31.3333333,250 C65.941,250 94,221.941 94,187.333333 L94,187.333333 L94,187.333333 Z M94,187.333333" id="Shape"></path>
+                    <path d="M241.81562,9.17714572 C229.577614,-3.05904857 209.739822,-3.05904857 197.501816,9.17714572 L79,127.661421 C100.608463,133.442671 117.563037,150.3634 123.313803,172 L241.81562,53.4843896 C254.06146,41.2481953 254.06146,21.41334 241.81562,9.17714572 L241.81562,9.17714572 Z M241.81562,9.17714572" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
