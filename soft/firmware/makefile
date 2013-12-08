@@ -25,7 +25,7 @@ CC := avr-gcc
 OBJCOPY := avr-objcopy
 SIZE := avr-size -C --mcu=$(MCU)
 
-CFLAGS := -Wall -pedantic -mmcu=$(MCU) -std=c99 -g -Os -DF_CPU=$(MCU_FREQ) -gstabs
+CFLAGS := -Wall -pedantic -mmcu=$(MCU) -std=gnu99 -g -Os -DF_CPU=$(MCU_FREQ) -gstabs
 
 all: $(HEX)
 
