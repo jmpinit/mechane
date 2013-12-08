@@ -14,7 +14,9 @@ HEX := $(BINDIR)$(S)$(NAME).hex
 OUT := $(OBJDIR)$(S)$(NAME).out
 MAP := $(OBJDIR)$(S)$(NAME).map
 
-SOURCES =	main.c
+SOURCES =	main.c \
+			Serial.c \
+			Motor.c
 INCLUDES = -Isrc$(S)inc -Ires
 OBJECTS = $(patsubst %,$(OBJDIR)$(S)%,$(SOURCES:.c=.o))
 MCU := atmega328p
