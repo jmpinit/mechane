@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -17,6 +18,8 @@
 
 #define BAUD 4800
 
+#define MOTOR_SLOWEST	0xFFF // the slowest speed cutoff
+
 #define LEFT	1
 #define RIGHT	-1
 
@@ -35,7 +38,7 @@
 // motor info
 typedef struct {
 	int8_t dir;
-	int inverse_speed;
+	uint16_t inverse_speed;
 } Motor;
 
 volatile Motor motor;
@@ -63,7 +66,10 @@ ISR(PCINT0_vect) {
 	}
 }
 
-ISR(TIMER1_OVF_vect) {
+void uart_tx(char c);
+
+ISR(TIMER1_COMPA_vect) {
+	motor.inverse_speed = 0xFFFF;
 	overflows++;
 }
 
@@ -90,6 +96,24 @@ void uart_tx(char c) {
 	UDR0 = c;
 }
 
+void uart_tx_str(char* str) {
+	char c;
+	while((c = *(str++))) uart_tx(c);
+}
+
+char buffer[16];
+void delay_print(int itrs, int time) {
+	for(int i=0; i < itrs; i++) {
+		if(motor.dir == LEFT)
+			sprintf(buffer, "-%u\n\r", motor.inverse_speed);
+		else
+			sprintf(buffer, "%u\n\r", motor.inverse_speed);
+
+		uart_tx_str(buffer);
+		for(int k=0; k<time; k++) _delay_ms(1);
+	}
+}
+
 int main(void) {
 	uart_init(F_CPU/16/BAUD-1);
 
@@ -106,33 +130,27 @@ int main(void) {
 	PORTC |= (1 << 2);
 
 	// setup 16 bit timer
-	TCCR1B = CLK_256;
-	TIFR1 = 1 << TOV1; // interrupt on overflow
+	TCCR1B |= CLK_8;
+	TIMSK1 |= 1 << OCIE1A; // interrupt on OCR1A compare match
+	OCR1A = MOTOR_SLOWEST;
 
 	sei();
 
 	forever {
-		uart_tx('h');
-		uart_tx('e');
-		uart_tx('l');
-		uart_tx('l');
-		uart_tx('o');
-		uart_tx('\n');
-
 		// forward
 		PORTC &= ~(1 << PIN_M_2A);
 		PORTC |= 1 << PIN_M_1A;
-		_delay_ms(1000);
+		delay_print(100, 10);
 		
 		// backward
 		PORTC &= ~(1 << PIN_M_1A);
 		PORTC |= 1 << PIN_M_2A;
-		_delay_ms(1000);
+		delay_print(100, 10);
 
 		// stop
 		PORTC &= ~(1 << PIN_M_1A);
 		PORTC &= ~(1 << PIN_M_2A);
-		_delay_ms(1000);
+		delay_print(100, 10);
 	}
 
 	return 0;
