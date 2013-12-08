@@ -1,8 +1,13 @@
+#define MOTOR_SLOWEST	0xFFF // the slowest speed cutoff
+
+#define LEFT	1
+#define RIGHT	-1
+
 // pins
 
-#define PIN_M_1A		PC0
-#define PIN_M_2A		PC1
-#define PIN_M_EN		PC2
+#define PIN_M_EN		PC0
+#define PIN_M_1A		PD5
+#define PIN_M_2A		PD6
 
 typedef enum {
 	POSITION,
@@ -19,6 +24,8 @@ typedef struct {
 } Motor;
 
 extern volatile Motor motor;
+
+void motor_init(void);
 
 void motor_stop(void);
 void motor_brake(void);

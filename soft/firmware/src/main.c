@@ -23,70 +23,18 @@
 
 #define NUM_SIZE 5
 
-#define MOTOR_SLOWEST	0xFFF // the slowest speed cutoff
-
-#define LEFT	1
-#define RIGHT	-1
-
 // pins
 
-#define PIN_LED0		PD6
-#define PIN_LED1		PD7
+#define PIN_LED0		PC4
+#define PIN_LED1		PC5
 
 #define PIN_A			PB0
 #define PIN_B			PB1
 
-volatile uint8_t overflows = 0;
-volatile uint8_t hist_portb = 0xFF;
-
 volatile Motor motor;
-
-ISR(PCINT0_vect) {
-	uint8_t changed;
-
-	changed = PINB ^ hist_portb;
-	hist_portb = PINB;
-
-	if(changed & (1 << PB0)) { // pb0 changed
-		// count down ticks
-		if(motor.mode == POSITION) {
-			if(motor.ticks > 0) {
-				motor.ticks--;
-			} else {
-				// stop!
-				motor_brake();
-			}
-		}
-
-		// calculate speed
-		motor.inverse_speed = TCNT1 & 0x7FFF;
-		TCNT1 = 0;
-
-		if(PINB & (1 << PB0)) { // pb0 rising edge
-			if(PINB & (1 << PB1)) // pb1 high or low?
-				motor.dir = LEFT;
-			else
-				motor.dir = RIGHT;
-		}
-	}
-}
 
 ISR(TIMER1_COMPA_vect) {
 	motor.inverse_speed = 0xFFFF;
-	overflows++;
-}
-
-char buffer[16];
-void delay_print(int itrs, int time) {
-	for(int i=0; i < itrs; i++) {
-		if(motor.dir == LEFT)
-			sprintf(buffer, "-%u\n\r", motor.inverse_speed);
-		else
-			sprintf(buffer, "%u\n\r", motor.inverse_speed);
-
-		uart_tx_str(buffer);
-		for(int k=0; k<time; k++) _delay_ms(1);
-	}
 }
 
 uint16_t decode(char* buffer, char* top) {
@@ -113,22 +61,15 @@ typedef enum {
 	CONFUSED
 } Mode;
 
+char buffer[16];
+
 int main(void) {
 	motor.target_speed = 20;
 
 	uart_init(F_CPU/16/BAUD-1);
+	motor_init();
 
-	// setup pin change interrupts
-	PCICR = 1 << PCIE0;
-	PCMSK0 = 1 << PCINT0;
-
-	// setup pins
-	DDRC |= (1 << PIN_M_EN) | (1 << PIN_M_1A) | (1 << PIN_M_2A);
-	DDRD |= (1 << PIN_LED0) | (1 << PIN_LED1);
-
-	// motor enabled
-	DDRC |= (1 << 2);
-	PORTC |= (1 << 2);
+	DDRC |= (1 << PIN_LED0) | (1 << PIN_LED1);
 
 	// setup 16 bit timer
 	TCCR1B |= CLK_8;
@@ -136,6 +77,33 @@ int main(void) {
 	OCR1A = MOTOR_SLOWEST;
 
 	sei();
+
+	// FIXME ====
+	DDRC |= 1 << PIN_M_EN;
+	PORTC |= 1 << PIN_M_EN;
+
+	forever {
+		for(unsigned int i=0; i < 255; i++) {
+			motor_set_vel(LEFT, i);
+			_delay_ms(10);
+		}
+		
+		for(unsigned int i=0; i < 255; i++) {
+			motor_set_vel(LEFT, 255-i);
+			_delay_ms(10);
+		}
+
+		for(unsigned int i=0; i < 255; i++) {
+			motor_set_vel(RIGHT, i);
+			_delay_ms(10);
+		}
+		
+		for(unsigned int i=0; i < 255; i++) {
+			motor_set_vel(RIGHT, 255-i);
+			_delay_ms(10);
+		}
+	}
+	// ==========
 
 	// control
 
@@ -167,11 +135,13 @@ int main(void) {
 						case 'k':
 						case 'K':
 							// TODO kill (de-energize)
+							motor_stop();
 							uart_tx_str("kill\n\r");
 							break;
 						case 'b':
 						case 'B':
 							// TODO brake
+							motor_brake();
 							uart_tx_str("brake\n\r");
 							break;
 					}
