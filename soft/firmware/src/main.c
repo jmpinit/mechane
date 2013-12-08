@@ -64,8 +64,6 @@ typedef enum {
 char buffer[16];
 
 int main(void) {
-	motor.target_speed = 20;
-
 	uart_init(F_CPU/16/BAUD-1);
 	motor_init();
 
@@ -106,6 +104,12 @@ int main(void) {
 						case 's': // status
 						case 'S':
 							uart_tx_str("I am okay.\n\r");
+							uart_tx_str("motor.mode: ");
+							switch(motor.mode) {
+								case POSITION:		uart_tx_str("position\n\r"); break;
+								case VELOCITY:		uart_tx_str("velocity\n\r"); break;
+								case ACCELERATION:	uart_tx_str("acceleration\n\r"); break;
+							}
 							break;
 						case 'k': // kill (de-energize)
 						case 'K':

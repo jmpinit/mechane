@@ -40,6 +40,7 @@ ISR(PCINT0_vect) {
 
 void motor_init() {
 	motor.mode = VELOCITY;
+	motor.target_speed = 255;
 
 	// pin change interrupt
 	// for quadrature encoder
