@@ -1,6 +1,8 @@
 // Console nerfing
 if (!window.console) window.console = { log: function() { } };
 
+
+
 var initSlider = function() {  
     $('input[type=range]').each(function() {  
         var $input = $(this);  
@@ -33,14 +35,7 @@ $("img.lazy").lazyload({
 // 	watch = true;
 // });
 
-$("#speed-slider").bind('mouseup',function(event){
-	// console.log(this.Value());
-	// console.log(this.val);
-	var value = $(this).slider( "option", "value" );
-	console.log(value);
-	$(this).slider( "option", "value", 0 );
 
-});
 
 
 $(function() {
