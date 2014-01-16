@@ -22,17 +22,6 @@
  *    THIS FILE IS BEING INCLUDED DIRECTLY		*
  *		(for performance reasons)				*
  ******************************************************/
-
-#include <stdint.h>
-#include <avr/io.h>
-
-/************************
- * configuration
-*/
-#include "rfm12_config.h"
-
-#include "rfm12_core.h"
-#include "rfm12_hw.h"
  
 //hardware spi helper macros
 #define SS_ASSERT() PORT_SS &= ~(1<<BIT_SS)
@@ -67,7 +56,7 @@ static uint8_t spi_data(uint8_t c)
 
 //non-inlined version of rfm12_data
 //warning: without the attribute, gcc will inline this even if -Os is set
-/*void __attribute__ ((noinline)) rfm12_data(uint16_t d)
+void __attribute__ ((noinline)) rfm12_data(uint16_t d)
 {
 	SS_ASSERT();
 	#if !(RFM12_SPI_SOFTWARE)
@@ -82,12 +71,12 @@ static uint8_t spi_data(uint8_t c)
 	spi_data(d &  0xff);
 	#endif
 	SS_RELEASE();
-}*/
+}
 
 
 //non-inlined version of rfm12_read
 //warning: without the attribute, gcc will inline this even if -Os is set
-/*uint16_t __attribute__ ((noinline)) rfm12_read(uint16_t c)
+uint16_t __attribute__ ((noinline)) rfm12_read(uint16_t c)
 {
 	uint16_t retval;
 	SS_ASSERT();
@@ -107,13 +96,13 @@ static uint8_t spi_data(uint8_t c)
 	#endif
 	SS_RELEASE();
 	return retval;
-}*/
+}
 
 
 /* @description reads the upper 8 bits of the status
  * register (the interrupt flags)
  */
-/*uint8_t rfm12_read_int_flags_inline()
+ uint8_t rfm12_read_int_flags_inline()
 {
 	SS_ASSERT();
 	#if !(RFM12_SPI_SOFTWARE)
@@ -136,12 +125,12 @@ static uint8_t spi_data(uint8_t c)
 	SS_RELEASE();
 	return d;
 	#endif
-}*/
+}
 
 
 /* @description inline version of rfm12_data for use in interrupt
  */
-/*void rfm12_data_inline(uint8_t cmd, uint8_t d)
+void rfm12_data_inline(uint8_t cmd, uint8_t d)
 {
 	SS_ASSERT();
 	#if !(RFM12_SPI_SOFTWARE)
@@ -156,12 +145,12 @@ static uint8_t spi_data(uint8_t c)
 	spi_data( d   );
 	#endif
 	SS_RELEASE();
-}*/
+}
 
 
 /* @description inline function for reading the fifo
  */
-/*uint8_t rfm12_read_fifo_inline()
+uint8_t rfm12_read_fifo_inline()
 {
 	SS_ASSERT();
 
@@ -183,9 +172,9 @@ static uint8_t spi_data(uint8_t c)
 	SS_RELEASE();
 	return retval;
 	#endif
-}*/
+}
 
-/*void spi_init()
+void spi_init()
 {
 	DDR_MOSI   |= (_BV(BIT_MOSI));
 	DDR_SCK    |= (_BV(BIT_SCK));
@@ -195,4 +184,4 @@ static uint8_t spi_data(uint8_t c)
 	#if !(RFM12_SPI_SOFTWARE)
 	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);//SPI Master, clk/16
 	#endif
-}*/
+}

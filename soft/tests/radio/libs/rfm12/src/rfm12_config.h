@@ -45,8 +45,6 @@
 	nSEL            | Slave select pin defined below
 */
 
-#ifndef _RFM12_EXTRA_H
-#define _RFM12_EXTRA_H
 
 /************************
  * PIN DEFINITIONS
@@ -75,7 +73,7 @@
  */
 
 //baseband of the module (either RFM12_BAND_433, RFM12_BAND_868 or RFM12_BAND_912)
-#define RFM12_BASEBAND RFM12_BAND_915
+#define RFM12_BASEBAND RFM12_BAND_433
 
 //center frequency to use (+-125kHz FSK frequency shift)
 #define FREQ 433175000UL
@@ -139,5 +137,3 @@
  */
  
 #define RFM12_UART_DEBUG 0
-
-#endif
