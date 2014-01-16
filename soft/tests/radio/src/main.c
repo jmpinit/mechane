@@ -6,6 +6,8 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
+#include "rfm12_config.h"
+#include "rfm12.h"
 #include "Serial.h"
 
 #define forever for(;;)
@@ -24,9 +26,17 @@ int main(void) {
 	uart_init(F_CPU/16/BAUD-1);
 
 	forever {
-		while(uart_available()) {
-			uart_tx_str("hello world");
-			_delay_ms(3000);
+		uint8_t teststring[] = "teststring\r\n";
+		uint8_t packettype = 0xEE;
+		rfm12_init();
+		sei();
+
+		forever {
+			rfm12_tx (sizeof(teststring), packettype, teststring);
+			rfm12_tick();
+
+			uart_tx_str("sent.\n");
+			_delay_ms(1000);
 		}
 	}
 

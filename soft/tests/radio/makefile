@@ -15,7 +15,11 @@ OUT := $(OBJDIR)$(S)$(NAME).out
 MAP := $(OBJDIR)$(S)$(NAME).map
 
 SOURCES =	main.c \
-			Serial.c
+			Serial.c \
+			rfm12.c \
+			rfm12_ctrl.c \
+			rfm12_extra.c \
+			rfm12_spi.c \
 
 INCLUDES = -Isrc$(S)inc -Ires
 OBJECTS = $(patsubst %,$(OBJDIR)$(S)%,$(SOURCES:.c=.o))
