@@ -35,7 +35,7 @@ int main(void) {
 	rfm12_init();
 	sei();
 
-	uart_tx_str("i am receiver, hello!\r\n");
+	/*uart_tx_str("i am receiver, hello!\r\n");
 	forever {
 		if(rfm12_rx_status() == STATUS_COMPLETE) {
 			uart_tx_str("new packet:\r\n");
@@ -52,22 +52,41 @@ int main(void) {
 			// tell the implementation that the buffer
 			// can be reused for the next data.
 			rfm12_rx_clear();
+		} else {
+			uart_tx_str("status: ");
+
+			switch(rfm12_rx_status()) {
+				case STATUS_FREE:
+					uart_tx_str("free.\r\n");
+					break;
+				case STATUS_OCCUPIED:
+					uart_tx_str("occupied.\r\n");
+					break;
+				default:
+					uart_tx('0'+rfm12_rx_status());
+					uart_tx_str("\r\n");
+			}
 		}
 
-		//_delay_ms(500);
-		//PINB |= 1 << PB0;
-	}
+		PORTB &= ~(1 << PB0);
+		_delay_ms(50);
+		PORTB |= 1 << PB0;
+		_delay_ms(50);
+	}*/
 
-	/*uart_tx_str("i am sender, hello!\r\n");
+	uart_tx_str("i am sender, hello!\r\n");
 	forever {
 		uart_tx_str("sending...\r\n");
 		rfm12_tx(sizeof(teststring), packettype, teststring);
 		rfm12_tick();
 
 		uart_tx_str("sent.\r\n");
-		//_delay_ms(1000);
-		//PINB |= 1 << PB0;
-	}*/
+
+		PORTB &= ~(1 << PB0);
+		_delay_ms(500);
+		PORTB |= 1 << PB0;
+		_delay_ms(500);
+	}
 
 	return 0;
 }

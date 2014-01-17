@@ -73,10 +73,11 @@
  */
 
 //baseband of the module (either RFM12_BAND_433, RFM12_BAND_868 or RFM12_BAND_912)
-#define RFM12_BASEBAND RFM12_BAND_433
+#define RFM12_BASEBAND RFM12_BAND_915
 
 //center frequency to use (+-125kHz FSK frequency shift)
-#define FREQ 433175000UL
+//#define FREQ 433175000UL
+#define FREQ 912000000UL
 
 //use this for datarates >= 2700 Baud
 #define DATARATE_VALUE RFM12_DATARATE_CALC_HIGH(9600.0)
@@ -112,7 +113,7 @@
 #define RFM12_FLAG_BIT (INTF1)
 
 //setup the interrupt to trigger on negative edge
-#define RFM12_INT_SETUP()   MCUCR |= (1<<ISC11)
+#define RFM12_INT_SETUP()   EICRA |= (1<<ISC11)
 
 
 /************************
