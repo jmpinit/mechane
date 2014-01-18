@@ -1,15 +1,34 @@
 import serial
 import math
 
-ser1 = serial.Serial("/dev/tty.usbserial-A4003GOG")  # open first serial port
-# ser2 = serial.Serial("/dev/tty.usbmodem1421")
-
+try:
+	ser1 = serial.Serial("/dev/tty.usbserial-A4003GOG")  # open first serial port
+	# ser2 = serial.Serial("/dev/tty.usbmodem1421")
+except Exception:
+	ser1 = False
+	print "Can't connect with serial motor"
+else:
+	print "Else statement"
 
 def position(degrees, type, id): #degrees are +/-, type is "rel" or "abs" (relative or absolute)
-	pass
-def velocity(speed, id): #speed isdeg/second
-	pass
+	if ser1:
+		ser1.write("\p")
+		ticks = 20.267 * degrees
+		ser1.write(str(ticks))
+
+	return None
+
+position(1,2,3)
+
+def velocity(speed, id): #speed is deg/second
+	if ser1:
+		ser1.write("\v")
+		ser1.write("speed")
+	return None
+
 def pid(p, i, d, id): #first order, second order, third order
+	if ser1:
+		ser1.write()
 	pass #http://code.activestate.com/recipes/577231-discrete-pid-controller/
 
 def resetCounter(id): #resets the position counter
@@ -18,7 +37,9 @@ def digitalWrite(state, pin, id): #sets one of the extra pins to high or low
 	pass
 
 def holdPosition(id):
-	pass #tells motor controller to keep current position via feedback
+	if ser1:
+		ser1.write("\b")
+	return None #tells motor controller to keep current position via feedback
 
 def getInfo(id): #enter "all" for id to get all information
  # returns a json object including the following information
@@ -26,7 +47,17 @@ def getInfo(id): #enter "all" for id to get all information
  # - current speed/direction
  # - current position from start 
  # - digital input (high/low)
- 	pass
+	if ser1:
+
+		ser1.write("\s")
+		print ser1.readline()
+		ser1.write("\i")
+		print ser1.readline()
+		print ser1.readline()
+		print ser1.readline()
+		print ser1.readline()
+
+	return None
 
 def move1d(distance, id): #moves one motor a given amount in degrees
 	position(distance, "rel", id)
@@ -64,7 +95,7 @@ def convert(x,y,separation):
 
 	return {"l1": l1, "l2": l2}
 
-move2d(10,10,100,50,50,"abs",1,2)
+# move2d(10,10,100,50,50,"abs",1,2)
 
 def move2dDrawbot():
 	input("Place the two motors together. Press Enter to continue...")
