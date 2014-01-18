@@ -21,7 +21,7 @@ INCLUDES = -Isrc$(S)inc -Ires
 OBJECTS = $(patsubst %,$(OBJDIR)$(S)%,$(SOURCES:.c=.o))
 MCU := atmega328p
 MCU_AVRDUDE := atmega328p
-MCU_FREQ := 1000000UL
+MCU_FREQ := 8000000UL
 
 CC := avr-gcc
 OBJCOPY := avr-objcopy
@@ -39,7 +39,8 @@ else
 endif
 
 flash: $(HEX)
-	sudo avrdude -y -c usbtiny -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
+	sudo avrdude -F -V -v -c arduino -p $(MCU_AVRDUDE) -P /dev/ttyUSB0 -b 57600 -U flash:w:$(HEX)
+#	sudo avrdude -y -c usbtiny -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
 
 $(HEX): $(OUT)
 	$(OBJCOPY) -R .eeprom -O ihex $< $@
