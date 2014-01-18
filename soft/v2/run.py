@@ -1,7 +1,7 @@
 import serial
 import math
 
-# ser1 = serial.Serial("/dev/tty.LeftMotor-RNI-SPP")  # open first serial port
+ser1 = serial.Serial("/dev/tty.usbserial-A4003GOG")  # open first serial port
 # ser2 = serial.Serial("/dev/tty.usbmodem1421")
 
 
