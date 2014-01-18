@@ -6,31 +6,17 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
+#include "Led.h"
 #include "Serial.h"
 #include "Motor.h"
 
 #define forever for(;;)
 
-#define CLK_NONE	1
-#define CLK_8		2
-#define CLK_64		3
-#define CLK_256		4
-#define CLK_1024	5
-
-// pins
-
-#define LED_GREEN	PC2
-#define LED_RED		PC3
-
 // constants
 
 #define NUM_SIZE 5 // len of number params in digits
 
-volatile Motor motor;
-
-ISR(TIMER1_COMPA_vect) {
-	motor.inverse_speed = 0xFFFF;
-}
+Motor motor;
 
 uint16_t decode(char* buffer, char* top) {
 	uint16_t value = 0;
@@ -66,11 +52,6 @@ int main(void) {
 	uart_init(50); // 19200 baud
 	motor_init();
 
-	// setup 16 bit timer
-	TCCR1B |= CLK_8;
-	TIMSK1 |= 1 << OCIE1A; // interrupt on OCR1A compare match
-	OCR1A = MOTOR_SLOWEST;
-
 	sei();
 
 	// control
@@ -81,10 +62,29 @@ int main(void) {
 	Mode mode = LISTEN;
 
 	forever {
+		/*sprintf(buffer, "vel=%d\r\n", (int)motor.vel);
+		uart_tx_str(buffer);*/
+		/*for(int i=0; i<motor.pos; i++)
+			uart_tx('*');
+		uart_tx_str("\r\n");*/
+		int v = motor.vel;
+		int tv = motor.target_vel;
+		if(v < 0) v = - v;
+		if(tv < 0) tv = -tv;
+		for(int i=0; i<v || i<tv && i<64; i++) {
+			if(i < tv && i < v) {
+				uart_tx('*');
+			} else if(i < v) {
+				uart_tx('+');
+			} else if(i < tv) {
+				uart_tx('x');
+			}
+		}
+		uart_tx_str("\r\n");
+
 		while(uart_available()) {
 			char c = uart_read_buff();
-			uart_tx(c);
-			PINC |= 1 << LED_GREEN;
+			//uart_tx(c);
 
 			if(mode == CONFUSED) {
 				// line end brings clarity
@@ -107,7 +107,6 @@ int main(void) {
 							switch(motor.mode) {
 								case POSITION:		uart_tx_str("position\n\r"); break;
 								case VELOCITY:		uart_tx_str("velocity\n\r"); break;
-								case ACCELERATION:	uart_tx_str("acceleration\n\r"); break;
 							}
 							break;
 						case 'k': // kill (de-energize)
@@ -120,14 +119,20 @@ int main(void) {
 							break;
 						case 'i':
 						case 'I':
-							sprintf(buffer, "dir=%d\r\n", motor.dir);
+							sprintf(buffer, "pos=%u\r\n", motor.pos);
+							uart_tx_str(buffer);
+							sprintf(buffer, "vel=%d\r\n", motor.vel);
+							uart_tx_str(buffer);
+							sprintf(buffer, "target pos=%u\r\n", motor.target_pos);
+							uart_tx_str(buffer);
+							sprintf(buffer, "target vel=%d\r\n", motor.target_vel);
 							uart_tx_str(buffer);
 							break;
 					}
 
 					mode = LISTEN;
 				} else {
-					if((c >= '0' && c <= '9') || c == '-') {
+					if((c >= '0' && c <= '9') || c == '+' || c == '-' || c == 'p' || c == 'd' || c == 'i') {
 						// starting a number?
 						if(mode == LISTEN) {
 							mode = READ;
@@ -145,15 +150,27 @@ int main(void) {
 							if(mode == READ) { // use the parameter that was read in
 								uint16_t num = decode(digit_buffer, digit);
 
-								switch(motor.mode) {
-									case POSITION:
-										motor_set_pos(digit_buffer[0] == '-' ? LEFT : RIGHT, num);
+								switch(digit_buffer[0]) {
+									case '+':
+									case '-':
+										switch(motor.mode) {
+											case POSITION:
+												motor_set_pos((digit_buffer[0] == '-' ? -1 : 1) * num);
+												break;
+											case VELOCITY:
+												motor_set_vel((digit_buffer[0] == '-' ? -1 : 1) * num);
+												break;
+										}
 										break;
-									case VELOCITY:
-										motor_set_vel(digit_buffer[0] == '-' ? LEFT : RIGHT, num);
+									// PID set
+									case 'p':
+										motor.pid.Kp = num;
 										break;
-									case ACCELERATION:
-										motor_set_accel(digit_buffer[0] == '-' ? LEFT : RIGHT, num);
+									case 'd':
+										motor.pid.Kd = num;
+										break;
+									case 'i':
+										motor.pid.Ki = num;
 										break;
 								}
 							}

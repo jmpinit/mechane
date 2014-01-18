@@ -1,35 +1,45 @@
-#define MOTOR_SLOWEST	0xFFF // the slowest speed cutoff
-
-#define LEFT	1
-#define RIGHT	-1
-
 // pins
 
 #define PIN_M_EN		PD7
 #define PIN_M_1A		PD5
 #define PIN_M_2A		PD6
 
+/* PID controller data */
+typedef struct {
+	float epsilon;
+	float dt;
+	float Kp, Kd, Ki;
+
+	float integral;
+	float pre_error;
+} PidData;
+
 typedef enum {
 	POSITION,
-	VELOCITY,
-	ACCELERATION
+	VELOCITY
 } MotorMode;
 
 typedef struct {
 	MotorMode mode;
-	int8_t dir;
-	uint16_t inverse_speed;
-	uint16_t target_speed;
-	unsigned int ticks;
+
+	volatile uint32_t pos;
+	volatile double vel;
+
+	uint32_t target_pos;
+	double target_vel;
+
+	PidData pid;
 } Motor;
 
-extern volatile Motor motor;
+extern Motor motor;
 
 void motor_init(void);
 
 void motor_stop(void);
 void motor_brake(void);
 
-void motor_set_pos(int8_t dir, unsigned int speed);
-void motor_set_vel(int8_t dir, unsigned int speed);
+void motor_set_pos(uint32_t pos);
+void motor_set_vel(int32_t vel);
 void motor_set_accel(int8_t dir, unsigned int speed);
+
+float pid_calc(PidData* prefs, float current, float target);
