@@ -5,7 +5,7 @@
 
 // pins
 
-#define PIN_M_EN		PC0
+#define PIN_M_EN		PD7
 #define PIN_M_1A		PD5
 #define PIN_M_2A		PD6
 

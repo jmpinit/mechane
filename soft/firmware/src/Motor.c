@@ -5,6 +5,12 @@
 
 #include "Motor.h"
 
+#define PIN_OFF(port,pin) (port) |= 1 << (pin);
+#define PIN_ON(port,pin) (port) &= ~(1 << (pin));
+
+#define MOTOR_DISABLE() PIN_OFF(PORTD, PIN_M_EN);
+#define MOTOR_ENABLE() PIN_ON(PORTD, PIN_M_EN);
+
 // quadrature encoder interrupt
 volatile uint8_t hist_portb = 0xFF;
 
@@ -48,15 +54,16 @@ void motor_init() {
 	PCMSK0 = 1 << PCINT0;
 
 	// motor control pins
-	DDRC |= 1 << PIN_M_EN;
+	DDRD |= 1 << PIN_M_EN;
 	DDRD |= (1 << PIN_M_1A) | (1 << PIN_M_2A);
+	MOTOR_DISABLE();
 
 	// pwm using timer0
 	// phase correct, OCR0A top, no prescale
-	TCCR0A = (1 << COM0A1) | (1 << WGM00);
+	TCCR0A = (1 << COM0A0) | (1 << COM0A1) | (1 << WGM00);
 	TCCR0B = (1 << CS00);
 
-	OCR0A = 0; // off
+	OCR0A = 255; // off
 }
 
 void motor_set_pos(int8_t dir, unsigned int speed) {
@@ -65,33 +72,37 @@ void motor_set_pos(int8_t dir, unsigned int speed) {
 }
 
 void motor_set_vel(int8_t dir, unsigned int speed) {
-	PORTC |= 1 << PIN_M_EN;
+	MOTOR_ENABLE();
 
 	if(dir == LEFT) {
+		TCCR0A &= ~(1 << COM0B0);
 		TCCR0A &= ~(1 << COM0B1);
+		TCCR0A |= (1 << COM0A0);
 		TCCR0A |= (1 << COM0A1);
 		OCR0A = speed;
 	} else {
+		TCCR0A &= ~(1 << COM0A0);
 		TCCR0A &= ~(1 << COM0A1);
+		TCCR0A |= (1 << COM0B0);
 		TCCR0A |= (1 << COM0B1);
 		OCR0B = speed;
 	}
 }
 
 void motor_set_accel(int8_t dir, unsigned int speed) {
-	PORTC &= ~(1 << PIN_M_1A);
-	PORTC |= 1 << PIN_M_2A;
+	PIN_OFF(PORTD, PIN_M_1A);
+	PIN_ON(PORTD, PIN_M_2A);
 }
 
 void motor_stop() {
-	PORTC &= ~(1 << PIN_M_1A);
-	PORTC &= ~(1 << PIN_M_2A);
+	PIN_OFF(PORTD, PIN_M_1A);
+	PIN_OFF(PORTD, PIN_M_2A);
 }
 
 void motor_brake() {
 	motor.ticks = 0;
 
-	PORTC &= ~(1 << PIN_M_EN);
-	PORTC &= ~(1 << PIN_M_1A);
-	PORTC &= ~(1 << PIN_M_2A);
+	MOTOR_DISABLE();
+	PIN_OFF(PORTD, PIN_M_1A);
+	PIN_OFF(PORTD, PIN_M_2A);
 }

@@ -17,19 +17,14 @@
 #define CLK_256		4
 #define CLK_1024	5
 
-// constants
-
-#define BAUD 4800
-
-#define NUM_SIZE 5
-
 // pins
 
-#define PIN_LED0		PC4
-#define PIN_LED1		PC5
+#define LED_GREEN	PC2
+#define LED_RED		PC3
 
-#define PIN_A			PB0
-#define PIN_B			PB1
+// constants
+
+#define NUM_SIZE 5 // len of number params in digits
 
 volatile Motor motor;
 
@@ -64,10 +59,12 @@ typedef enum {
 char buffer[16];
 
 int main(void) {
-	uart_init(F_CPU/16/BAUD-1);
-	motor_init();
+	// led init
+	DDRC |= (1 << LED_GREEN) | (1 << LED_RED);
+	PORTC |= 1 << LED_RED;
 
-	DDRC |= (1 << PIN_LED0) | (1 << PIN_LED1);
+	uart_init(50); // 19200 baud
+	motor_init();
 
 	// setup 16 bit timer
 	TCCR1B |= CLK_8;
@@ -86,6 +83,8 @@ int main(void) {
 	forever {
 		while(uart_available()) {
 			char c = uart_read_buff();
+			uart_tx(c);
+			PINC |= 1 << LED_GREEN;
 
 			if(mode == CONFUSED) {
 				// line end brings clarity
@@ -118,6 +117,11 @@ int main(void) {
 						case 'b':
 						case 'B': // brake
 							motor_brake();
+							break;
+						case 'i':
+						case 'I':
+							sprintf(buffer, "dir=%d\r\n", motor.dir);
+							uart_tx_str(buffer);
 							break;
 					}
 
