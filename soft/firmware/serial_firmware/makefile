@@ -38,9 +38,11 @@ else
 	rm $(HEX) $(OUT) $(MAP) $(OBJECTS)
 endif
 
-flash: $(HEX)
+bootloader:
 	sudo avrdude -F -V -v -c arduino -p $(MCU_AVRDUDE) -P /dev/ttyUSB0 -b 57600 -U flash:w:$(HEX)
-#	sudo avrdude -y -c usbtiny -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
+
+usbtiny: $(HEX)
+	sudo avrdude -y -c usbtiny -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
 
 $(HEX): $(OUT)
 	$(OBJCOPY) -R .eeprom -O ihex $< $@
