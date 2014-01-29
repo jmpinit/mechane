@@ -12,7 +12,7 @@ Purpose
 
 ### Modular, Computerized Winch or Motor System
 
-Mechane consists of fist-sized, wireless winch/motor modules and a Bluetooth/USB interface block. The modules are designed to work individually or collaboratively in groups, moving objects through space under the command of a nearby phone, tablet, laptop, or PC, or remotely over the Internet. One module gives 1 dimension of movement, to pull window blinds or pan a camera, for example. Two modules give two dimensions of movement, to create a drawbot or pan and tilt a camera. Three or more modules give full three dimensional movement, to carry small objects to arbitrary x, y, and z coordinates like in this project from Penn State University.
+Mechane consists of fist-sized, wireless winch/motor modules and a Bluetooth/USB interface block. The modules are designed to work individually or collaboratively in groups, moving objects through space under the command of a nearby phone, tablet, laptop, or PC, or remotely over the Internet. One module gives 1 dimension of movement, to pull window blinds or pan a camera, for example. Two modules give two dimensions of movement, to create a drawbot or pan and tilt a camera. Three or more modules give full three dimensional movement, to carry small objects to arbitrary x, y, and z coordinates like in [this project](http://www.youtube.com/watch?v=g6v9cSiqf6A) from Penn State University.
 
 Origin
 ------
