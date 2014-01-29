@@ -48,7 +48,7 @@ int main(void) {
 	DDRC |= (1 << LED_GREEN) | (1 << LED_RED);
 	PORTC |= 1 << LED_RED;
 
-	uart_init(50); // 19200 baud
+	uart_init(27); // 19200 baud
 	motor_init();
 
 	sei();
