@@ -9,6 +9,7 @@
 #include "Led.h"
 #include "Serial.h"
 #include "Motor.h"
+#include "rfm12.h"
 
 #define forever for(;;)
 // constants
@@ -50,6 +51,7 @@ int main(void) {
 
 	uart_init(27); // 19200 baud
 	motor_init();
+	rfm12_init();
 
 	sei();
 

@@ -1,4 +1,4 @@
-NAME := mechane_radio
+NAME := motor_module
 
 ifeq ($(OS),Windows_NT)
 S := \\
@@ -16,13 +16,13 @@ MAP := $(OBJDIR)$(S)$(NAME).map
 
 SOURCES =	main.c \
 			Serial.c \
-			rfm12.c \
-
+			Motor.c \
+			rfm12.c
 INCLUDES = -Isrc$(S)inc -Ilibs
 OBJECTS = $(patsubst %,$(OBJDIR)$(S)%,$(SOURCES:.c=.o))
 MCU := atmega328p
 MCU_AVRDUDE := atmega328p
-MCU_FREQ := 1000000UL
+MCU_FREQ := 8000000UL
 
 CC := avr-gcc
 OBJCOPY := avr-objcopy
@@ -39,9 +39,11 @@ else
 	rm $(HEX) $(OUT) $(MAP) $(OBJECTS)
 endif
 
-flash: $(HEX)
+bootloader:
 	sudo avrdude -F -V -v -c arduino -p $(MCU_AVRDUDE) -P /dev/ttyUSB0 -b 57600 -U flash:w:$(HEX)
-	#   sudo avrdude -y -c usbtiny -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
+
+usbtiny: $(HEX)
+	sudo avrdude -y -c usbtiny -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
 
 $(HEX): $(OUT)
 	$(OBJCOPY) -R .eeprom -O ihex $< $@
