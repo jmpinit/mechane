@@ -11,6 +11,7 @@ OBJDIR := obj
 BINDIR := bin
 
 HEX := $(BINDIR)$(S)$(NAME).hex
+BIN := $(BINDIR)$(S)$(NAME).bin
 OUT := $(OBJDIR)$(S)$(NAME).out
 MAP := $(OBJDIR)$(S)$(NAME).map
 
@@ -22,6 +23,7 @@ INCLUDES = -Isrc$(S)inc -Ilibs
 OBJECTS = $(patsubst %,$(OBJDIR)$(S)%,$(SOURCES:.c=.o))
 MCU := atmega328p
 MCU_AVRDUDE := atmega328p
+MCU_SIMULATE := atmega328
 MCU_FREQ := 8000000UL
 
 CC := avr-gcc
@@ -30,7 +32,7 @@ SIZE := avr-size -C --mcu=$(MCU)
 
 CFLAGS := -Wall -pedantic -mmcu=$(MCU) -std=gnu99 -g -Os -DF_CPU=$(MCU_FREQ) -gstabs
 
-all: $(HEX)
+all: $(HEX) $(BIN)
 
 clean:
 ifeq ($(OS),Windows_NT)
@@ -45,8 +47,17 @@ bootloader:
 usbtiny: $(HEX)
 	sudo avrdude -y -c usbtiny -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
 
+sim: $(OUT) data/
+	simulavr -V -d $(MCU_SIMULATE) -F $(MCU_FREQ) -W 0xC6,data/serial --file $(OBJDIR)/$(NAME).out
+
+data/:
+	mkdir data
+
 $(HEX): $(OUT)
 	$(OBJCOPY) -R .eeprom -O ihex $< $@
+
+$(BIN): $(OUT)
+	$(OBJCOPY) -R .eeprom -O binary $< $@
 
 $(OUT): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ -Wl,-Map,$(MAP) $^
