@@ -53,6 +53,8 @@ int main(void) {
 	motor_init();
 	rfm12_init();
 
+	uart_tx_str("hello world!\r\n");
+
 	sei();
 
 	// control

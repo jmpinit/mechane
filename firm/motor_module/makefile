@@ -48,7 +48,8 @@ usbtiny: $(HEX)
 	sudo avrdude -y -c usbtiny -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
 
 sim: $(OUT) data/
-	simulavr -V -d $(MCU_SIMULATE) -F $(MCU_FREQ) -W 0xC6,data/serial --file $(OBJDIR)/$(NAME).out
+	tests/sim.py $(MCU_SIMULATE) $(MCU_FREQ) $(OBJDIR)$(S)$(NAME).out
+#	simulavr -V -d $(MCU_SIMULATE) -F $(MCU_FREQ) -W 0xC6,data/serial --file $(OBJDIR)$(S)$(NAME).out
 
 data/:
 	mkdir data
