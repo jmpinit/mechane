@@ -1,0 +1,41 @@
+/* =====================================
+ Mobile Nav
+ ===================================== */
+// Requires mobile-nav.js.
+
+// SETTINGS /////////////
+$bkg-repeat:	repeat-x;
+$bkg-position:	top left;
+////////////////////////
+
+#mobile-nav {
+	display: none;
+}
+
+@media screen and max-width: 568px {
+	// HIDE MAIN NAV HERE:
+	#nav {
+		display: none;
+	}
+	
+	#mobile-nav {
+		display: block;
+		width: 100%;
+		height: 50px;
+		background-position: $bkg-position;
+		background-repeat: $bkg-repeat;
+		position: relative;
+		
+		
+		.logo {
+			position: absolute;
+			left: 8px;
+			top: 8px;
+			height: 100%;
+		}
+		
+	}
+}
+
+
+

@@ -1,0 +1,7 @@
+obj/
+bin/
+
+*.hex
+*.out
+
+*.swp

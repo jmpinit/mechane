@@ -6,50 +6,92 @@ var ctx;
 var z = false;
 // var points = new Array();
 
+InitThis();
+
 function InitThis() {
-    ctx = document.getElementById('myCanvas').getContext("2d");
+    var value;
 
-    $('#myCanvas').mousedown(function (e) { 
-        mousePressed = true;
-        // points = [];
-        var x = Math.round(e.pageX - $(this).offset().left);
-        var y = Math.round(e.pageY - $(this).offset().top);
-        Draw(x, y, false);
-        z = true;
-        sendToSocket({"z":z});
-        sendToSocket({"x":x,"y":y});
-    });
-
-    $('#myCanvas').mousemove(function (e) {
-        if (mousePressed) {
-            var x = Math.round(e.pageX - $(this).offset().left);
-            var y = Math.round(e.pageY - $(this).offset().top);
-            Draw(x, y, true);
-            //console.log(e.timeStamp);
-            // points.push({"x":x,"y":y});
-            sendToSocket({"x":x,"y":y});
-
+    $("#speed-slider").bind('mousemove',function(event){
+        // console.log(this.Value());
+        // console.log(this.val);
+        if ($(this).slider( "option", "value" ) != value){
+            value = $(this).slider( "option", "value" );
+            console.log(value);
+            sendToSocket({"velocity":value});
         }
+        // $(this).slider( "option", "value", 0 );
+
     });
 
-    $('#myCanvas').mouseup(function (e) {
-        mousePressed = false;
-        z = false;
-        sendToSocket({"z":z});
-        // console.log(points.length);
-        // if (points.length > 0) sendToSocket(points);
+    $("#speed-slider").bind('mouseup',function(event){
+
+        $(this).slider( "option", "value", 0 );
+        sendToSocket({"velocity":0});
+
     });
 
-    $('#myCanvas').mouseleave(function (e) {
-        mousePressed = false;
-        if (z == true){
-            z = false;
-            sendToSocket({"z":z});
+
+    $("#position-slider").bind('mousemove',function(event){
+        // console.log(this.Value());
+        // console.log(this.val);
+        if ($(this).slider( "option", "value" ) != value){
+            value = $(this).slider( "option", "value" );
+            console.log(value);
+            sendToSocket({"position":value});
         }
+        // $(this).slider( "option", "value", 0 );
+
+    });
+
+    // $("#speed-slider").bind("change", function(event){
+    //     // console.log(this.Value());
+    //     // console.log(this.val);
+    //     var value = $(this).slider( "option", "value" );
+    //     console.log(value);
+    //     $(this).slider( "option", "value", 0 );
+
+    // });
+
+    // $('#position-slider').mousedown(function (e) { 
+    //     mousePressed = true;
+    //     // points = [];
+    //     var x = Math.round(e.pageX - $(this).offset().left);
+    //     var y = Math.round(e.pageY - $(this).offset().top);
+    //     Draw(x, y, false);
+    //     z = true;
+    //     sendToSocket({"position":});
+    // });
+
+    // $('#myCanvas').mousemove(function (e) {
+    //     if (mousePressed) {
+    //         var x = Math.round(e.pageX - $(this).offset().left);
+    //         var y = Math.round(e.pageY - $(this).offset().top);
+    //         Draw(x, y, true);
+    //         //console.log(e.timeStamp);
+    //         // points.push({"x":x,"y":y});
+    //         sendToSocket({"x":x,"y":y});
+
+    //     }
+    // });
+
+    // $('#myCanvas').mouseup(function (e) {
+    //     mousePressed = false;
+    //     z = false;
+    //     sendToSocket({"z":z});
+    //     // console.log(points.length);
+    //     // if (points.length > 0) sendToSocket(points);
+    // });
+
+    // $('#myCanvas').mouseleave(function (e) {
+    //     mousePressed = false;
+    //     if (z == true){
+    //         z = false;
+    //         sendToSocket({"z":z});
+    //     }
         
-        // console.log(points.length);
-        // if (points.length > 0) sendToSocket(points);
-    });
+    //     // console.log(points.length);
+    //     // if (points.length > 0) sendToSocket(points);
+    // });
 }
 
 function Draw(x, y, isDown) {
@@ -87,21 +129,7 @@ function sendToPHP(data) {
 }
 
 function sendToSocket(point) {
-    // $.ajax({
-    //     url: '/dl',
-    //     type: 'PUT',
-    //     contentType: 'application/json',
-    //     data: JSON.stringify({ url: url }),
-    //     dataType: 'json',
-    //     statusCode: {
-    //         200: function() {
-    //             callback(true);
-    //         },
-    //         400: function() {
-    //             callback(false);
-    //         }
-    //     }
-    // });
+
     $.ajax({
         url: '/dl',
         type: 'PUT',

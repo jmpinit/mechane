@@ -32,25 +32,30 @@
   
   <!-- Open Graph Boilerplate: http://ogp.me/ -->
   <!-- Four Required Properties: -->
-  <meta property="og:title" content="2doodle: a modular computer controlled drawing platform"/>
+  <meta property="og:title" content="mechane: a modular computer controlled drawing platform"/>
   <meta property="og:type" content="website"/>
   <!-- Image when shared. Square, JPG/PNG, 50x50px minimum. -->
   <!-- <meta property="og:image" content="http://designemcee.com/apple-touch-icon-144x144-precomposed.png"/> -->
   <!-- Canonical Link -->
   <meta property="og:url" content="">
   <!-- Optional Properties: -->
-  <!-- <meta property="og:site_name" content="2doodle"/> -->
+  <!-- <meta property="og:site_name" content="mechane"/> -->
   <!-- <meta property="og:description" content="" /> -->
   
   
-  <title>2doodle: a modular computer controlled drawing platform</title>
+  <title>mechane: a modular computer controlled drawing platform</title>
   <link rel="stylesheet" href="./css/normalize.css" />
   <link rel="stylesheet" href="./css/app.css" />
   <link rel="shortcut icon" href="http://hazelnutdev.com/favicon.ico">
 
 <!--  <script src="./js/vendor/custom.modernizr.js"></script>-->
   	<!-- css transforms -->
+  	  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+
 	<script src="./js/modernizr.custom.37575.js"></script>
+	<script src="./js/vendor/jquery.js"></script>
+	<!-- <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>-->
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </head>
 <body>
 <div id="container" class="home work static-nav">
@@ -64,7 +69,7 @@
 		<div id="scrolly" style="position:absolute; top:50%; height:100% display:none;">&nbsp;</div>
 
 		<div id="site-title">
-			<h1>2doodle</h1>
+			<h1>mechane</h1>
 		</div>		
 		<div id="profile-picture">
 			<noscript><img src="./img/pen.svg" style="width:20%; min-width:200px;"></noscript>
@@ -119,7 +124,7 @@
 
 	<div id="process">
 		<div id="scrolly" style="position:absolute; top:40%; height:100% display:none;">&nbsp;</div>
-		<div style="text-align:center;"><h1>doodle-what?</h1></div>
+		<div style="text-align:center;"><h1>what?</h1></div>
 
 	    <div class="row process-bullet">
 			<div class="small-12 large-9 small-centered columns" >
@@ -175,36 +180,35 @@
 
 	<div id="work">
 		<div id="scrolly" style="position:absolute; top:60%; height:100% display:none;">&nbsp;</div>
-		<div style="text-align:center;"><h1>Draw Here</h1></div>
-
-		<div id="draw" align="center">
-	        <canvas id="myCanvas" width="800" height="450" style="border:0px solid black"></canvas>
-	        <br/>
-	        <div id="controls">
-		        <button id="clearArea">Clear Canvas</button>
-		        <!-- <button onclick="">Draw</button> -->
-
-		        <div style="display:none;">
-			        Line width : <select id="selWidth">
-			            <option value="1">1</option>
-			            <option value="3">3</option>
-			            <option value="5">5</option>
-			            <option value="7">7</option>
-			            <option value="9" selected="selected">9</option>
-			            <option value="11">11</option>
-			        </select> 
-			        Color : <select id="selColor">
-			            <option value="black">black</option>
-			            <option value="blue" selected="selected">blue</option>
-			            <option value="red">red</option>
-			            <option value="green">green</option>
-			            <option value="yellow">yellow</option>
-			            <option value="gray">gray</option>
-			        </select>
-			    </div>
-		    </div>
-		    <div id="coordsResponse" style="display: none; font-size:15px; margin:10px;"></div>
-	    </div>
+		<div class="row">
+			<div class="small-12 columns">
+				<div style="text-align:center;"><h1>Controls</h1></div>
+	 		</div>
+		</div>
+		<div class="row">
+			<div class="small-3 columns">
+	 			<h3>Speed</h3>
+	 		</div>
+			<div class="small-9 columns">
+	 			<div id="speed-slider" style="margin-top: 20px;"></div>
+	 		</div>
+		</div>
+		<div class="row">
+			<div class="small-3 columns">
+	 			<h3>Position</h3>
+	 		</div>
+			<div class="small-9 columns">
+	 			<div id="position-slider" style="margin-top: 18px;"></div>
+	 		</div>
+		</div>
+		<div class="row">
+			<div class="small-offset-3 small-1 columns">
+				<p>0</p>
+	 		</div>
+	 		<div class="small-offset-3 small-1 columns">
+	 			<p>360</p>
+	 		</div>
+		</div>
 
 	</div>
 
@@ -283,7 +287,7 @@
 		
 		<!-- Add custom youtube events to Google Analytics -->
 		
-		<script src="./js/vendor/jquery.js"></script>
+		
 		<script src="./js/vendor/jquery.lazyload.js"></script>
 		<script src="./js/foundation/foundation.js"></script>
 		<script src="./js/foundation/foundation.clearing.js"></script>	

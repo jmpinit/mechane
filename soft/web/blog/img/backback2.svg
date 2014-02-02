@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>backback2</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs></defs>
+    <g id="Page 1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(0.000000, -5.000000)" fill="#373633">
+            <path d="M44.3247035,110.392011 L70.6752965,134.646534 C75.5468658,139.130592 79.5,137.398743 79.5,130.77386 L79.5,73.7646842 C79.5,67.1466382 75.5490456,65.4059462 70.6752965,69.8920107 L44.3247035,94.1465338 C39.4531342,98.6305919 39.4509544,105.905946 44.3247035,110.392011 Z M100,205 C44.7715223,205 0,160.228478 0,105 C0,49.7715223 44.7715223,5 100,5 C155.228478,5 200,49.7715223 200,105 C200,160.228478 155.228478,205 100,205 Z M106.001874,93 C102.68713,93 100,95.6832456 100,98.9943041 L100,111.005696 C100,114.316259 102.680027,117 106.001874,117 L154.998126,117 C158.31287,117 161,114.316754 161,111.005696 L161,98.9943041 C161,95.6837413 158.319973,93 154.998126,93 Z M106.001874,93" id="Oval 1"></path>
+        </g>
+    </g>
+</svg>

@@ -3,12 +3,46 @@ if (!window.console) window.console = { log: function() { } };
 
 
 
+var initSlider = function() {  
+    $('input[type=range]').each(function() {  
+        var $input = $(this);  
+        var $slider = $('#speed');  
+        var step = $input.attr('step');  
+
+        $input.after($slider).hide();  
+
+        $slider.slider({  
+            min: $input.attr('min'),  
+            max: $input.attr('max'),  
+            step: $input.attr('step'),  
+            change: function(e, ui) {  
+                $(this).val(ui.value);  
+            }  
+        });  
+    });  
+};  
+
+
+
 jQuery('img.lazy').attr('src',jQuery(this).attr('data-src'));
 
 $("img.lazy").lazyload({
      //effect       : "fadeIn"
      threshold : 100
  });
+
+// $("#slider").click(function(event){
+// 	watch = true;
+// });
+
+
+
+
+$(function() {
+    $( "#speed-slider" ).slider({ animate: "fast", min: -255, max: 255 });
+    $( "#position-slider" ).slider({ animate: "fast", min: 0, max: 360 });
+});
+
 
 $(".scroll").click(function(event){
      event.preventDefault();
